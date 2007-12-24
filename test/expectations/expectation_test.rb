@@ -21,12 +21,12 @@ Expectations do
     Expectations::Expectation.new(1) { raise }.execute.line
   end
 
-  # expect "file" do
-  #   Expectations::Expectation.new(1) { 2 }.execute.file
-  # end
-  # 
-  # expect "file" do
-  #   Expectations::Expectation.new(1) { raise }.execute.file
-  # end
+  expect __FILE__ do
+    Expectations::Expectation.new(1) { 2 }.execute.file
+  end
+  
+  expect __FILE__ do
+    Expectations::Expectation.new(1) { raise }.execute.file
+  end
 
 end
