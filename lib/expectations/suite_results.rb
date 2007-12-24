@@ -22,8 +22,8 @@ class Expectations::SuiteResults
       out.puts "Errors:"
       error.each do |err|
         out.puts "In #{err.file}:#{err.line}"
+        out.puts "  error: <#{err.exception.message}>"
         out.puts "  expected: <#{err.expected.inspect}> got: <#{err.actual.inspect}>"
-        out.puts "  error: <#{err.exception.inspect}>"
       end
     end
   end
