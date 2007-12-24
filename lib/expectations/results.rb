@@ -1,13 +1,19 @@
 module Expectations::Results
+  def fulfilled?
+    self.is_a?(Expectations::Results::Fulfilled)
+  end
+  
+  def status
+    self.class.name.split(/::/).last.downcase.to_sym
+  end
+  
+  def self.included(klass)
+    klass.extend ClassMethods
+  end
+  
   module ClassMethods
     def char(arg)
       define_method :char do
-        arg
-      end
-    end
-
-    def passed?(arg)
-      define_method :passed? do
         arg
       end
     end
@@ -16,24 +22,21 @@ end
 
 module Expectations::Results
   class Failure
-    extend Expectations::Results::ClassMethods
+    include Expectations::Results
     char "F"
-    passed? false
   end
 end
 
 module Expectations::Results
-  class Success
-    extend Expectations::Results::ClassMethods
+  class Fulfilled
+    include Expectations::Results
     char "."
-    passed? true
   end
 end
 
 module Expectations::Results
   class Error
-    extend Expectations::Results::ClassMethods
+    include Expectations::Results
     char "E"
-    passed? false
   end
 end

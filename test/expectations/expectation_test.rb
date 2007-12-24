@@ -4,7 +4,7 @@ Expectations do
   expect Expectations::Results::Failure do
     Expectations::Expectation.new(1) { 2 }.execute.class
   end
-  expect Expectations::Results::Success do
+  expect Expectations::Results::Fulfilled do
     Expectations::Expectation.new(1) { 1 }.execute.class
   end
   expect Expectations::Results::Error do

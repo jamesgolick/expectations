@@ -6,7 +6,7 @@ class Expectations::Expectation
   
   def execute
     begin
-      return Expectations::Results::Success.new if expected == block.call
+      return Expectations::Results::Fulfilled.new if expected == block.call
     rescue
       return Expectations::Results::Error.new
     end
