@@ -17,4 +17,5 @@ Expectations do
     suite.expect(1) { 2 }
     suite.execute(Silent)
   end
+
 end

@@ -3,35 +3,35 @@ require File.dirname(__FILE__) + "/../test_helper"
 Expectations do
 
   expect "." do
-    Expectations::Results::Fulfilled.new.char
+    Object.new.extend(Expectations::Results::Fulfilled).char
   end
 
   expect "F" do
-    Expectations::Results::Failure.new.char
+    Object.new.extend(Expectations::Results::Failure).char
   end
 
   expect "E" do
-    Expectations::Results::Error.new.char
+    Object.new.extend(Expectations::Results::Error).char
   end
 
   expect true do
-    Expectations::Results::Fulfilled.new.fulfilled?
+    Object.new.extend(Expectations::Results::Fulfilled).fulfilled?
   end
 
   expect false do
-    Expectations::Results::Failure.new.fulfilled?
+    Object.new.extend(Expectations::Results::Failure).fulfilled?
   end
 
   expect false do
-    Expectations::Results::Error.new.fulfilled?
+    Object.new.extend(Expectations::Results::Error).fulfilled?
   end
 
   expect :fulfilled do
-    Expectations::Results::Fulfilled.new.status
+    Object.new.extend(Expectations::Results::Fulfilled).status
   end
 
   expect :failure do
-    Expectations::Results::Failure.new.status
+    Object.new.extend(Expectations::Results::Failure).status
   end
 
 end

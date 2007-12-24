@@ -2,7 +2,9 @@ class Expectations::Suite
   
   def execute(out=STDOUT)
     suite_result = Expectations::SuiteResults.new(out)
-    expectations.each { |expectation| suite_result << expectation.execute }
+    expectations.each do |expectation|
+      suite_result << expectation.execute
+    end
     suite_result.print_results
     suite_result.result
   end

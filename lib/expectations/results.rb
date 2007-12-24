@@ -1,10 +1,16 @@
+class Object
+  def metaclass
+    class << self; self; end
+  end
+end
+
 module Expectations::Results
-  def fulfilled?
-    self.is_a?(Expectations::Results::Fulfilled)
+  def initialize(file, line)
+    self.line, self.file = line, file
   end
   
-  def status
-    self.class.name.split(/::/).last.downcase.to_sym
+  def fulfilled?
+    self.is_a?(Expectations::Results::Fulfilled)
   end
   
   def self.included(klass)
@@ -17,25 +23,35 @@ module Expectations::Results
         arg
       end
     end
+    
+    def extended(klass)
+      mod = self
+      klass.metaclass.class_eval do
+        define_method :status do
+          mod.name.split(/::/).last.downcase.to_sym
+        end
+      end
+    end
   end
 end
 
 module Expectations::Results
-  class Failure
+  module Failure
     include Expectations::Results
     char "F"
   end
 end
 
 module Expectations::Results
-  class Fulfilled
+  module Fulfilled
     include Expectations::Results
     char "."
   end
 end
 
 module Expectations::Results
-  class Error
+  module Error
+    attr_accessor :exception
     include Expectations::Results
     char "E"
   end
