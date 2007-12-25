@@ -1,8 +1,5 @@
 require File.dirname(__FILE__) + "/test_helper"
 
-class Phone
-end
-
 Expectations do
   
   expect 2 do
@@ -29,6 +26,10 @@ Expectations do
   expect Object.to_receive(:foo).with(1).times(2) do
     Object.foo(1)
     Object.foo(1)
+  end
+  
+  expect Object.new.to_receive(:foo).with(2) do |bar|
+    bar.foo(2)
   end
   
 end
