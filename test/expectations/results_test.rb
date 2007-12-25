@@ -26,12 +26,4 @@ Expectations do
     Object.new.extend(Expectations::Results::Error).fulfilled?
   end
 
-  expect :fulfilled do
-    Object.new.extend(Expectations::Results::Fulfilled).status
-  end
-
-  expect :failure do
-    Object.new.extend(Expectations::Results::Failure).status
-  end
-
 end

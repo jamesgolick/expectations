@@ -1,9 +1,3 @@
-class Object
-  def metaclass
-    class << self; self; end
-  end
-end
-
 module Expectations::Results
   def initialize(file, line)
     self.line, self.file = line, file
@@ -21,15 +15,6 @@ module Expectations::Results
     def char(arg)
       define_method :char do
         arg
-      end
-    end
-    
-    def extended(klass)
-      mod = self
-      klass.metaclass.class_eval do
-        define_method :status do
-          mod.name.split(/::/).last.downcase.to_sym
-        end
       end
     end
   end

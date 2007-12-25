@@ -2,10 +2,12 @@ class Expectations::Suite
   
   def execute(out=STDOUT)
     suite_result = Expectations::SuiteResults.new(out)
-    expectations.each do |expectation|
-      suite_result << expectation.execute
+    benchmark = Benchmark.measure do
+      expectations.each do |expectation|
+        suite_result << expectation.execute
+      end
     end
-    suite_result.print_results
+    suite_result.print_results(benchmark)
     suite_result.result
   end
   

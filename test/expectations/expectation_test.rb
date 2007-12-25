@@ -1,16 +1,16 @@
 require File.dirname(__FILE__) + "/../test_helper"
 
 Expectations do
-  expect :failure do
-    Expectations::Expectation.new(1) { 2 }.execute.status
+  expect true do
+    Expectations::Expectation.new(1) { 2 }.execute.is_a?(Expectations::Results::Failure)
   end
   
-  expect :fulfilled do
-    Expectations::Expectation.new(1) { 1 }.execute.status
+  expect true do
+    Expectations::Expectation.new(1) { 1 }.execute.is_a?(Expectations::Results::Fulfilled)
   end
   
-  expect :error do
-    Expectations::Expectation.new(1) { raise }.execute.status
+  expect true do
+    Expectations::Expectation.new(1) { raise }.execute.is_a?(Expectations::Results::Error)
   end
   
   expect __LINE__ + 1 do

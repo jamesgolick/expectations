@@ -10,7 +10,7 @@ Expectations do
   expect 0 do
     results = Expectations::SuiteResults.new(Silent)
     results << Object.new.extend(Expectations::Results::Fulfilled)
-    results.error.size
+    results.errors.size
   end
   
   expect true do

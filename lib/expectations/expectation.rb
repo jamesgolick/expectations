@@ -10,8 +10,9 @@ class Expectations::Expectation
       self.actual = block.call
       return self.extend(Expectations::Results::Fulfilled) if expected == actual
     rescue Exception => ex
+      return self.extend(Expectations::Results::Fulfilled) if expected == ex.class
       self.extend(Expectations::Results::Error)
-      self.exception = ex
+      self.exception, self.actual = ex, ex.class
       return self
     end
     self.extend(Expectations::Results::Failure)
