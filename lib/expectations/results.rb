@@ -21,7 +21,18 @@ module Expectations::Results
 end
 
 module Expectations::Results
-  module Failure
+  module StateBasedFailure
+    include Expectations::Results
+    char "F"
+    def message 
+      "expected: <#{expected.inspect}> got: <#{actual.inspect}>"
+    end
+  end
+end
+
+module Expectations::Results
+  module BehaviorFailure
+    attr_accessor :message
     include Expectations::Results
     char "F"
   end

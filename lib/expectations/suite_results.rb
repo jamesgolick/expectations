@@ -22,7 +22,9 @@ class Expectations::SuiteResults
   end
   
   def failures
-    expectations.select { |expectation| expectation.is_a?(Expectations::Results::Failure) }
+    expectations.select do |expectation|
+      expectation.is_a?(Expectations::Results::StateBasedFailure) || expectation.is_a?(Expectations::Results::BehaviorFailure)
+    end
   end
   
   def print_results(benchmark)
@@ -37,14 +39,14 @@ class Expectations::SuiteResults
       errors.each do |error|
         out.puts " #{error.file}:#{error.line}:in `expect'"
         out.puts " line <#{error.line}>"
-        out.puts " error <#{error.exception.message}>"
+        out.puts " error <#{error.exception.message.gsub(/:/,";")}>"
         out.puts " expected <#{error.expected.inspect}> got <#{error.actual.inspect}>"
       end
       out.puts "\nFailures:" if failures.any?
       failures.each do |failure|
         out.puts " #{failure.file}:#{failure.line}:in `expect'"
         out.puts " line <#{failure.line}>"
-        out.puts " expected: <#{failure.expected.inspect}> got: <#{failure.actual.inspect}>"
+        out.puts " #{failure.message}"
       end
     end
   end

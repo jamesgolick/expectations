@@ -1,4 +1,9 @@
 class Expectations::Suite
+  include Mocha::Standalone
+
+  def initialize
+    mocha_setup
+  end
   
   def execute(out=STDOUT)
     suite_result = Expectations::SuiteResults.new(out)
@@ -10,7 +15,7 @@ class Expectations::Suite
     suite_result.print_results(benchmark)
     suite_result.result
   end
-  
+
   def expectations
     @expectations ||= []
   end

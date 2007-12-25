@@ -21,7 +21,13 @@ Expectations do
 
   expect false do
     results = Expectations::SuiteResults.new(Silent)
-    results << Object.new.extend(Expectations::Results::Failure)
+    results << Object.new.extend(Expectations::Results::StateBasedFailure)
+    results.result
+  end
+
+  expect false do
+    results = Expectations::SuiteResults.new(Silent)
+    results << Object.new.extend(Expectations::Results::BehaviorFailure)
     results.result
   end
 end
