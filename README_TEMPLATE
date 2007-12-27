@@ -37,3 +37,5 @@ expectations can be used for state based and behavior based testing.
 <%= File.readlines(File.dirname(__FILE__) + "/test/sample_expectations_test.rb").collect { |line| "\t#{line}"}.join %>
 
 == Contributors
+
+Matt Mower
