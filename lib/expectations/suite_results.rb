@@ -28,7 +28,9 @@ class Expectations::SuiteResults
   end
   
   def print_results(benchmark)
-    out.puts "\nFinished in #{benchmark.real.to_s.gsub(/(\d*)\.(\d{0,5}).*/,'\1.\2')} seconds"
+    run_time = benchmark.real
+    run_time = 0.001 if run_time < 0.001
+    out.puts "\nFinished in #{run_time.to_s.gsub(/(\d*)\.(\d{0,5}).*/,'\1.\2')} seconds"
     if result
       out.puts "\nSuccess: #{fulfilled.size} fulfilled"
     else
