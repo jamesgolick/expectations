@@ -16,8 +16,16 @@ Rake::RDocTask.new do |task|
   task.rdoc_files.include('README', 'lib/**/*.rb')
 end
 
+task :rdoc => :readme
+
+desc "Generate README"
+task :readme do
+  %x[erb README_TEMPLATE > README]
+end
+
+
 desc "Upload RDoc to RubyForge"
-task :publish_rdoc => [:rdoc] do
+task :publish_rdoc => :rdoc do
   Rake::SshDirPublisher.new("jaycfields@rubyforge.org", "/var/www/gforge-projects/expectations", "doc").upload
 end
 

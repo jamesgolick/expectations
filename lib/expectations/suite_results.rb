@@ -28,9 +28,7 @@ class Expectations::SuiteResults
   end
   
   def print_results(benchmark)
-    benchmark_seconds = benchmark.real.to_s.split(".").first
-    benchmark_subseconds = benchmark.real.to_s.split(".").last[0..5]
-    out.puts "\nFinished in #{benchmark_seconds}.#{benchmark_subseconds} seconds"
+    out.puts "\nFinished in #{benchmark.real.to_s.gsub(/(\d*)\.(\d{0,5}).*/,'\1.\2')} seconds"
     if result
       out.puts "\nSuccess: #{fulfilled.size} fulfilled"
     else
