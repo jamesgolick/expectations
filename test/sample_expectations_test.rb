@@ -23,4 +23,16 @@ Expectations do
     Object.deal(1)
   end
   
+  # expect Object.to_receive(:deal).with(1) do
+  #   Object.deals(1)
+  # end
+  # 
+  # expect Object.to_receive(:deal).with(1) do
+  #   Object.deal(2)
+  # end
+  # 
+  # expect Object.to_receive(:deal).with(1) do
+  #   Object.deal(1)
+  # end
+  
 end

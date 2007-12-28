@@ -46,9 +46,20 @@ module Expectations::Results
 end
 
 module Expectations::Results
-  module Error
+  module BehaviorBasedError
+    attr_accessor :exception, :message
+    include Expectations::Results
+    char "E"
+  end
+end
+
+module Expectations::Results
+  module StateBasedError
     attr_accessor :exception
     include Expectations::Results
     char "E"
+    def message 
+      "expected: <#{expected.inspect}> got: <#{actual.inspect}>"
+    end
   end
 end

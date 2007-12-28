@@ -15,7 +15,7 @@ Expectations do
   end
 
   expect "E" do
-    Object.new.extend(Expectations::Results::Error).char
+    Object.new.extend(Expectations::Results::BehaviorBasedError).char
   end
 
   expect true do
@@ -31,7 +31,7 @@ Expectations do
   end
 
   expect false do
-    Object.new.extend(Expectations::Results::Error).fulfilled?
+    Object.new.extend(Expectations::Results::BehaviorBasedError).fulfilled?
   end
 
 end

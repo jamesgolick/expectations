@@ -18,7 +18,9 @@ class Expectations::SuiteResults
   end
   
   def errors
-    expectations.select { |expectation| expectation.is_a?(Expectations::Results::Error) }
+    expectations.select do |expectation|
+      expectation.is_a?(Expectations::Results::StateBasedError) || expectation.is_a?(Expectations::Results::BehaviorBasedError)
+    end
   end
   
   def failures
@@ -35,18 +37,20 @@ class Expectations::SuiteResults
       out.puts "\nSuccess: #{fulfilled.size} fulfilled"
     else
       out.puts "\nFailure: #{failures.size} failed, #{errors.size} errors, #{fulfilled.size} fulfilled"
-      out.puts "\nErrors:" if errors.any?
+      out.puts "\n--Errors--" if errors.any?
       errors.each do |error|
-        out.puts " #{error.file}:#{error.line}:in `expect'"
-        out.puts " line <#{error.line}>"
-        out.puts " error <#{error.exception.message.gsub(/:/,";")}>"
-        out.puts " expected <#{error.expected.inspect}> got <#{error.actual.inspect}>"
+        out.puts " #{error.file}:#{error.line}:in `expect'" if ENV["TM_MODE"]
+        out.puts "file <#{error.file}>"
+        out.puts "line <#{error.line}>"
+        out.puts "error <#{error.exception.message}>"
+        out.puts "#{error.message}\n\n" if error.message.any?
       end
-      out.puts "\nFailures:" if failures.any?
+      out.puts "\n--Failures--" if failures.any?
       failures.each do |failure|
-        out.puts " #{failure.file}:#{failure.line}:in `expect'"
-        out.puts " line <#{failure.line}>"
-        out.puts " #{failure.message}"
+        out.puts " #{failure.file}:#{failure.line}:in `expect'" if ENV["TM_MODE"]
+        out.puts "file <#{failure.file}>"
+        out.puts "line <#{failure.line}>"
+        out.puts "#{failure.message}\n\n"
       end
     end
   end

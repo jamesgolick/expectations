@@ -10,7 +10,7 @@ Expectations do
   end
   
   expect true do
-    Expectations::Expectation.new(1) { raise }.execute.is_a?(Expectations::Results::Error)
+    Expectations::Expectation.new(1) { raise }.execute.is_a?(Expectations::Results::StateBasedError)
   end
   
   expect NoMethodError do

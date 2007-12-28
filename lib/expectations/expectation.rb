@@ -20,10 +20,11 @@ class Expectations::Expectation
       self.extend(Expectations::Results::Fulfilled)
     rescue Mocha::ExpectationError => ex
       self.extend(Expectations::Results::BehaviorFailure)
-      self.message = ex.message.gsub(/:/,";")
+      self.message = ex.message
     rescue Exception => ex
-      self.extend(Expectations::Results::Error)
+      self.extend(Expectations::Results::BehaviorBasedError)
       self.exception = ex 
+      self.message = ""
     ensure
       mocha_teardown
     end
@@ -36,7 +37,7 @@ class Expectations::Expectation
       return self.extend(Expectations::Results::Fulfilled) if expected == actual
     rescue Exception => ex
       return self.extend(Expectations::Results::Fulfilled) if expected == ex.class
-      self.extend(Expectations::Results::Error)
+      self.extend(Expectations::Results::StateBasedError)
       self.exception = ex 
       self.actual = ex.class if expected.is_a?(Class) && expected < StandardError
       return self
