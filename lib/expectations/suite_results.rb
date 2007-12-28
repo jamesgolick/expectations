@@ -43,7 +43,8 @@ class Expectations::SuiteResults
         out.puts "file <#{error.file}>"
         out.puts "line <#{error.line}>"
         out.puts "error <#{error.exception.message}>"
-        out.puts "#{error.message}\n\n" if error.message.any?
+        out.puts "#{error.message}" if error.message.any?
+        out.puts "\n"
       end
       out.puts "\n--Failures--" if failures.any?
       failures.each do |failure|

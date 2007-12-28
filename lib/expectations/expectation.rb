@@ -14,6 +14,8 @@ class Expectations::Expectation
   def behavior_based_execute
     begin
       mock = expected.instance_variable_get(:@mock)
+      mock.expectations.expectations.clear
+      mock.add_expectation(expected)
       mocha_setup
       instance_exec mock, &block
       mock.verify
@@ -23,8 +25,7 @@ class Expectations::Expectation
       self.message = ex.message
     rescue Exception => ex
       self.extend(Expectations::Results::BehaviorBasedError)
-      self.exception = ex 
-      self.message = ""
+      self.exception = ex
     ensure
       mocha_teardown
     end
