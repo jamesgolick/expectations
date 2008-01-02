@@ -16,13 +16,13 @@ expectations is designed to encourage unit testing best practices such as
   - provide one syntax for setting up state based or behavior based expectation
   - focus on readability by providing no mechanism for describing an expectation other than the code in the expectation.
 
-Mocking is done utilizing Mocha
+Mocking is done utilizing Mocha[http://mocha.rubyforge.org]
 
 by Jay[http://blog.jayfields.com] Fields[http://blog.jayfields.com]
 
 == Download and Installation
 
-You can download arbs from here[http://rubyforge.org/projects/expectations] or install it with the following command.
+You can download expectations from here[http://rubyforge.org/projects/expectations] or install it with the following command.
 
  $ gem install expectations
 
