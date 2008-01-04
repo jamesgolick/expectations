@@ -43,7 +43,8 @@ class Expectations::SuiteResults
         out.puts "file <#{error.file}>"
         out.puts "line <#{error.line}>"
         out.puts "error <#{error.exception.message}>"
-        out.puts "#{error.message}" if error.message.any?
+        out.puts "trace #{filter_backtrace(error.exception.backtrace)}"
+        out.puts "#{error.message}" if error.message && error.message.any?
         out.puts "\n"
       end
       out.puts "\n--Failures--" if failures.any?
@@ -53,6 +54,16 @@ class Expectations::SuiteResults
         out.puts "line <#{failure.line}>"
         out.puts "#{failure.message}\n\n"
       end
+    end
+  end
+  
+  def filter_backtrace(trace)
+    patterns_to_strip = [/\/expectations\/lib\/expectations\//, /\/lib\/ruby\/1\.8\//]
+    result = patterns_to_strip.inject(trace) do |result, element|
+      result = result.select { |line| line !~ element}
+    end
+    result.collect do |line|
+      "\n  #{line}"
     end
   end
 end

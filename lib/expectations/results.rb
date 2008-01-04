@@ -25,7 +25,8 @@ module Expectations::Results
     include Expectations::Results
     char "F"
     def message 
-      "expected: <#{expected.inspect}> got: <#{actual.inspect}>"
+      result = "expected: <#{expected.inspect}> got: <#{actual.inspect}>"
+      result += "\nstring details: #{expected.diff(actual)}" if expected.is_a?(String) && actual.is_a?(String)
     end
   end
 end
@@ -55,11 +56,8 @@ end
 
 module Expectations::Results
   module StateBasedError
-    attr_accessor :exception
+    attr_accessor :exception, :message
     include Expectations::Results
     char "E"
-    def message 
-      "expected: <#{expected.inspect}> got: <#{actual.inspect}>"
-    end
   end
 end

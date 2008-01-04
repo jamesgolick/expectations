@@ -40,7 +40,7 @@ class Expectations::Expectation
       return self.extend(Expectations::Results::Fulfilled) if expected == ex.class
       self.extend(Expectations::Results::StateBasedError)
       self.exception = ex 
-      self.actual = ex.class if expected.is_a?(Class) && expected < StandardError
+      self.message = "expected: <#{expected.inspect}> got: <#{ex.class.inspect}>" if expected.is_a?(Class) && expected < StandardError
       return self
     end
     self.extend(Expectations::Results::StateBasedFailure)

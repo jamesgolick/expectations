@@ -22,5 +22,4 @@ Expectations do
   expect Object.to_receive(:deal) do
     Object.deal
   end
-  
 end

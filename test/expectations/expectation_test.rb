@@ -13,10 +13,6 @@ Expectations do
     Expectations::Expectation.new(1) { raise }.execute.is_a?(Expectations::Results::StateBasedError)
   end
   
-  expect NoMethodError do
-    Expectations::Expectation.new(ArgumentError) { Object.no_method }.execute.actual
-  end
-  
   expect "undefined method `no_method' for Object:Class" do
     Expectations::Expectation.new(ArgumentError) { Object.no_method }.execute.exception.to_s
   end
