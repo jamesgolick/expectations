@@ -1,5 +1,7 @@
 class Object
-  alias to_receive expects
+  def to_receive(method)
+    Expectations::MockRecorder.new(self, method)
+  end
 
   unless defined? instance_exec # 1.9
     module InstanceExecMethods #:nodoc:

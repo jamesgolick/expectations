@@ -1,8 +1,7 @@
 class Expectations::Suite
-  include Mocha::Standalone
 
-  def initialize
-    mocha_setup
+  def mock
+    Mocha::Mock.new
   end
   
   def execute(out=STDOUT)

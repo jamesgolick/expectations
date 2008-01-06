@@ -27,6 +27,7 @@ module Expectations::Results
     def message 
       result = "expected: <#{expected.inspect}> got: <#{actual.inspect}>"
       result += "\nstring details: #{expected.diff(actual)}" if expected.is_a?(String) && actual.is_a?(String)
+      result
     end
   end
 end
