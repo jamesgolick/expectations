@@ -30,6 +30,14 @@ You can download expectations from here[http://rubyforge.org/projects/expectatio
  	
 You may use, copy and redistribute this library under the same terms as Ruby itself (see http://www.ruby-lang.org/en/LICENSE.txt).
 
+== TextMate
+
+The following code can be used as a new command in TextMate for running an individual expectation.
+
+  export LINE="$TM_LINE_NUMBER"
+  export RUBYLIB="$TM_BUNDLE_SUPPORT/RubyMate${RUBYLIB:+:$RUBYLIB}"
+  "${TM_RUBY:-ruby}" -- "$TM_BUNDLE_SUPPORT/RubyMate/run_script.rb"
+
 == Usage
 
 expectations can be used for state based and behavior based testing.
