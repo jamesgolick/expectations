@@ -2,7 +2,11 @@ module Expectations
 end
 
 def Expectations(&block)
-  Expectations::SuiteRunner.instance.suite_eval &block
+  begin
+    Expectations::SuiteRunner.instance.suite_eval &block
+  rescue
+    Expectations::SuiteRunner.instance.do_not_run
+  end
 end
 
 require 'rubygems'

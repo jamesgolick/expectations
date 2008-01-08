@@ -33,5 +33,11 @@ Expectations do
     Object.expects(:bar).returns 2
     Object.bar
   end
-
+  
+  # Behavior based test utilizing a stub and a concrete mock
+  expect 1 do
+    Object.expects(:give_me_three).with(3).returns 1
+    Object.give_me_three(stub(:three=>3).three)
+  end
+  
 end

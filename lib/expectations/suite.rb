@@ -1,7 +1,7 @@
 class Expectations::Suite
 
   def mock
-    Mocha::Mock.new
+    Expectations::MockRecorder.new(self)
   end
   
   def execute(out=STDOUT)

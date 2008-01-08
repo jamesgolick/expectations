@@ -1,8 +1,8 @@
 class Expectations::MockRecorder
   attr_accessor :target
-  def initialize(target, method)
+  def initialize(target, method=nil)
     self.target = target
-    events << MockEvent.new(:expects, [method])
+    events << MockEvent.new(:expects, [method]) unless method.nil?
   end
   
   def events
@@ -10,6 +10,7 @@ class Expectations::MockRecorder
   end
   
   def method_missing(method, *args)
+    super if events.empty?
     events << MockEvent.new(method, args)
     self
   end
