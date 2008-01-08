@@ -22,5 +22,16 @@ Expectations do
   expect Object.to_receive(:deal) do
     Object.deal
   end
+  
+  # State based test utilizing a stub
+  expect 2 do
+    stub(:two => 2).two
+  end
+  
+  # State based test utilizing a concrete mock
+  expect 2 do
+    Object.expects(:bar).returns 2
+    Object.bar
+  end
 
 end

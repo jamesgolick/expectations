@@ -1,6 +1,4 @@
 module Expectations::BehaviorBasedExpectation
-  include Mocha::Standalone
-
   def execute
     begin
       mocha_setup

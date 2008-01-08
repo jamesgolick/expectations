@@ -1,7 +1,8 @@
 module Expectations::StateBasedExpectation
   def execute
     begin
-      self.actual = block.call
+      mocha_setup
+      self.actual = instance_eval &block
       return self.extend(Expectations::Results::Fulfilled) if expected == actual
     rescue Exception => ex
       return self.extend(Expectations::Results::Fulfilled) if expected == ex.class
@@ -9,6 +10,8 @@ module Expectations::StateBasedExpectation
       self.exception = ex 
       self.message = "expected: <#{expected.inspect}> got: <#{ex.class.inspect}>" if expected.is_a?(Class) && expected < StandardError
       return self
+    ensure
+      mocha_teardown
     end
     self.extend(Expectations::Results::StateBasedFailure)
   end

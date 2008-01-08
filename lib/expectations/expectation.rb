@@ -1,5 +1,5 @@
 class Expectations::Expectation
-
+  include Mocha::Standalone
   attr_accessor :expected, :block, :file, :line, :actual
   
   def initialize(expected, &block)
