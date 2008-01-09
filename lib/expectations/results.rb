@@ -7,6 +7,14 @@ module Expectations::Results
     self.is_a?(Expectations::Results::Fulfilled)
   end
   
+  def failure?
+    self.is_a?(Expectations::Results::StateBasedFailure) || self.is_a?(Expectations::Results::BehaviorFailure)
+  end
+  
+  def error?
+    self.is_a?(Expectations::Results::StateBasedError) || self.is_a?(Expectations::Results::BehaviorBasedError)
+  end
+  
   def self.included(klass)
     klass.extend ClassMethods
   end

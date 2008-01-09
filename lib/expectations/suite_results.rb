@@ -14,19 +14,15 @@ class Expectations::SuiteResults
   end
   
   def fulfilled
-    expectations.select { |expectation| expectation.is_a?(Expectations::Results::Fulfilled) }
+    expectations.select { |expectation| expectation.fulfilled? }
   end
   
   def errors
-    expectations.select do |expectation|
-      expectation.is_a?(Expectations::Results::StateBasedError) || expectation.is_a?(Expectations::Results::BehaviorBasedError)
-    end
+    expectations.select { |expectation| expectation.error? }
   end
   
   def failures
-    expectations.select do |expectation|
-      expectation.is_a?(Expectations::Results::StateBasedFailure) || expectation.is_a?(Expectations::Results::BehaviorFailure)
-    end
+    expectations.select { |expectation| expectation.failure? }
   end
   
   def print_results(benchmark)
@@ -58,8 +54,28 @@ class Expectations::SuiteResults
   end
   
   def write_junit_xml(path)
-    File.open(path, "w") do |file|
-      # file << 
+    grouped_expectations = expectations.inject({}) do |result, expectation| 
+      result[expectation.file] = [] if result[expectation.file].nil?
+      result[expectation.file] << expectation
+      result
+    end
+    grouped_expectations.keys.each do |file_name|
+      class_name = "#{File.basename(file_name, ".rb")}.xml"
+      FileUtils.rm_rf path if File.exist?(path)
+      FileUtils.mkdir_p path
+      File.open("#{path}/#{class_name}", "w") do |file|
+        file << '<?xml version="1.0" encoding="UTF-8" ?>'
+        grouped_fulfilled = grouped_expectations[file_name].select { |expectation| expectation.fulfilled? }
+        grouped_errors = grouped_expectations[file_name].select { |expectation| expectation.error? }
+        grouped_failures = grouped_expectations[file_name].select { |expectation| expectation.failure? }
+        file << %[<testsuite errors="#{grouped_errors.size}" skipped="0" tests="#{grouped_expectations[file_name].size}" time="0.00" failures="#{grouped_failures.size}" name="#{class_name}">]
+        grouped_expectations[file_name].each do |expectation|
+          file << %[<testcase time="0.0" name="line:#{expectation.line}">]
+          file << %[<failure type="java.lang.AssertionError" message="#{ERB::Util.h(expectation.message)}"/>] if expectation.failure?
+          file << %[</testcase>]
+        end
+        file << %[</testsuite>]
+      end
     end
   end
   

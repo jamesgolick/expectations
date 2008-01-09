@@ -14,6 +14,8 @@ require 'mocha'
 require 'mocha/standalone'
 require 'singleton'
 require 'benchmark'
+require 'erb'
+require 'fileutils'
 require File.expand_path(File.dirname(__FILE__) + '/expectations/object')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/string')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/mocha')
