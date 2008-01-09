@@ -57,6 +57,12 @@ class Expectations::SuiteResults
     end
   end
   
+  def write_junit_xml(path)
+    File.open(path, "w") do |file|
+      # file << 
+    end
+  end
+  
   def filter_backtrace(trace)
     patterns_to_strip = [/\/expectations\/lib\/expectations\//, /\/lib\/ruby\/1\.8\//]
     result = patterns_to_strip.inject(trace) do |result, element|

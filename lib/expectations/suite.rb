@@ -10,6 +10,7 @@ class Expectations::Suite
       ENV["LINE"].nil? ? run_all(suite_result) : run_one(suite_result)
     end
     suite_result.print_results(benchmark)
+    suite_result.write_junit_xml(ENV["JUnitXmlPath"]) unless ENV["JUnitXmlPath"].nil?
     suite_result.result
   end
   

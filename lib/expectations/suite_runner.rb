@@ -4,7 +4,7 @@ class Expectations::SuiteRunner
   
   def initialize
     self.suite = Expectations::Suite.new
-    self.runnable = false
+    self.runnable = true
     at_exit do
       exit 1 unless runnable && suite.execute
     end
