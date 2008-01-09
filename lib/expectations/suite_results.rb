@@ -54,6 +54,8 @@ class Expectations::SuiteResults
   end
   
   def write_junit_xml(path)
+    FileUtils.rm_rf path if File.exist?(path)
+    FileUtils.mkdir_p path
     grouped_expectations = expectations.inject({}) do |result, expectation| 
       result[expectation.file] = [] if result[expectation.file].nil?
       result[expectation.file] << expectation
@@ -61,9 +63,7 @@ class Expectations::SuiteResults
     end
     grouped_expectations.keys.each do |file_name|
       class_name = "#{File.basename(file_name, ".rb")}.xml"
-      FileUtils.rm_rf path if File.exist?(path)
-      FileUtils.mkdir_p path
-      File.open("#{path}/#{class_name}", "w") do |file|
+      File.open("#{path}/TEST-#{class_name}", "w") do |file|
         file << '<?xml version="1.0" encoding="UTF-8" ?>'
         grouped_fulfilled = grouped_expectations[file_name].select { |expectation| expectation.fulfilled? }
         grouped_errors = grouped_expectations[file_name].select { |expectation| expectation.error? }
