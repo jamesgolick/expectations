@@ -40,4 +40,35 @@ Expectations do
     Object.give_me_three(stub(:three=>3).three)
   end
   
+  # State based test matching a Regexp
+  expect /a string/ do
+    "a string"
+  end
+  
+  # State based test checking if actual is in the expected Range
+  expect 1..5 do
+    3
+  end
+  
+  # State based test to determine if the object is an instance of the module
+  expect Enumerable do
+    []
+  end
+
+  # State based test to determine if the object is an instance of the class
+  expect String do
+    "a string"
+  end
+  
+  # State based test to determine if the modules are the same
+  expect Enumerable do
+    Enumerable
+  end
+  
+  # State based test to determine if the classes are the same
+  expect String do
+    String
+  end
+  
+  
 end

@@ -10,7 +10,7 @@ Expectations do
   end
   
   expect true do
-    Expectations::Expectation.new(1) { raise }.execute.is_a?(Expectations::Results::StateBasedError)
+    Expectations::Expectation.new(1) { raise }.execute.is_a?(Expectations::Results::Error)
   end
   
   expect "undefined method `no_method' for Object:Class" do

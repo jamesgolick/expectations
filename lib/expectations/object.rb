@@ -2,6 +2,10 @@ class Object
   def to_receive(method)
     Expectations::MockRecorder.new(self, method)
   end
+  
+  def expectations_equal_to(other)
+    self == other
+  end
 
   unless defined? instance_exec # 1.9
     module InstanceExecMethods #:nodoc:

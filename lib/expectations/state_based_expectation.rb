@@ -3,10 +3,10 @@ module Expectations::StateBasedExpectation
     begin
       mocha_setup
       self.actual = instance_eval &block
-      return self.extend(Expectations::Results::Fulfilled) if expected == actual
+      return self.extend(Expectations::Results::Fulfilled) if expected.expectations_equal_to(actual)
     rescue Exception => ex
       return self.extend(Expectations::Results::Fulfilled) if expected == ex.class
-      self.extend(Expectations::Results::StateBasedError)
+      self.extend(Expectations::Results::Error)
       self.exception = ex 
       self.message = "expected: <#{expected.inspect}> got: <#{ex.class.inspect}>" if expected.is_a?(Class) && expected < StandardError
       return self

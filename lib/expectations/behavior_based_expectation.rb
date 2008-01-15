@@ -9,7 +9,7 @@ module Expectations::BehaviorBasedExpectation
       self.extend(Expectations::Results::BehaviorFailure)
       self.message = ex.message
     rescue Exception => ex
-      self.extend(Expectations::Results::BehaviorBasedError)
+      self.extend(Expectations::Results::Error)
       self.exception = ex
     ensure
       mocha_teardown

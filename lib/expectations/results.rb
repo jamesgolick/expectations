@@ -12,7 +12,7 @@ module Expectations::Results
   end
   
   def error?
-    self.is_a?(Expectations::Results::StateBasedError) || self.is_a?(Expectations::Results::BehaviorBasedError)
+    self.is_a?(Expectations::Results::Error)
   end
   
   def self.included(klass)
@@ -56,15 +56,7 @@ module Expectations::Results
 end
 
 module Expectations::Results
-  module BehaviorBasedError
-    attr_accessor :exception, :message
-    include Expectations::Results
-    char "E"
-  end
-end
-
-module Expectations::Results
-  module StateBasedError
+  module Error
     attr_accessor :exception, :message
     include Expectations::Results
     char "E"
