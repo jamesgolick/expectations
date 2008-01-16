@@ -6,6 +6,7 @@ def Expectations(&block)
     Expectations::SuiteRunner.instance.suite_eval &block
   rescue
     Expectations::SuiteRunner.instance.do_not_run
+    raise
   end
 end
 

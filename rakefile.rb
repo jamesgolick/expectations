@@ -41,7 +41,7 @@ specification = Gem::Specification.new do |s|
   expect NoMethodError do 
     Object.invalid_method_call 
   end."
-	s.version = "0.1.1"
+	s.version = "0.1.2"
 	s.author = 'Jay Fields'
   s.description = "A lightweight unit testing framework. Tests (expectations) will be written as follows 
   expect 2 do 
