@@ -5,6 +5,11 @@ class Expectations::MockRecorder
     events << MockEvent.new(:expects, [method]) unless method.nil?
   end
   
+  def to_receive(method)
+    events << MockEvent.new(:expects, [method])
+    self
+  end
+  
   def events
     @events ||= []
   end
