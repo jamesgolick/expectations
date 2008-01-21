@@ -2,9 +2,14 @@ require 'rubygems'
 require 'rake/gempackagetask'
 require 'rake/rdoctask'
 require 'rake/contrib/sshpublisher'
+require 'rake/testtask'
 
-task :default do
-  require File.dirname(__FILE__) + '/test/all_tests.rb'  
+task :default => [:test]
+
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
 end
 
 desc 'Generate RDoc'
@@ -41,7 +46,7 @@ specification = Gem::Specification.new do |s|
   expect NoMethodError do 
     Object.invalid_method_call 
   end."
-	s.version = "0.1.3"
+	s.version = "0.1.4"
 	s.author = 'Jay Fields'
   s.description = "A lightweight unit testing framework. Tests (expectations) will be written as follows 
   expect 2 do 

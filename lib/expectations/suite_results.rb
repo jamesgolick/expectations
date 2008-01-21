@@ -1,16 +1,19 @@
 class Expectations::SuiteResults
-  attr_accessor :result, :out, :expectations
+  attr_accessor :out, :expectations
   
   def initialize(out)
-    self.out, self.result, self.expectations = out, true, []
+    self.out, self.expectations = out, []
     out.print "Expectations "
   end
   
   def <<(expectation_result)
     out.print expectation_result.char
     self.expectations << expectation_result
-    self.result &&= expectation_result.fulfilled?
     self
+  end
+  
+  def succeeded?
+    expectations.all? { |expectation| expectation.fulfilled? }
   end
   
   def fulfilled
@@ -29,7 +32,7 @@ class Expectations::SuiteResults
     run_time = benchmark.real
     run_time = 0.001 if run_time < 0.001
     out.puts "\nFinished in #{run_time.to_s.gsub(/(\d*)\.(\d{0,5}).*/,'\1.\2')} seconds"
-    if result
+    if succeeded?
       out.puts "\nSuccess: #{fulfilled.size} fulfilled"
     else
       out.puts "\nFailure: #{failures.size} failed, #{errors.size} errors, #{fulfilled.size} fulfilled"

@@ -8,7 +8,7 @@ module Expectations::Results
   end
   
   def failure?
-    self.is_a?(Expectations::Results::StateBasedFailure) || self.is_a?(Expectations::Results::BehaviorFailure)
+    self.is_a?(Expectations::Results::StateBasedFailure) || self.is_a?(Expectations::Results::BehaviorBasedFailure)
   end
   
   def error?
@@ -41,7 +41,7 @@ module Expectations::Results
 end
 
 module Expectations::Results
-  module BehaviorFailure
+  module BehaviorBasedFailure
     attr_accessor :message
     include Expectations::Results
     char "F"

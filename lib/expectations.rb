@@ -2,12 +2,10 @@ module Expectations
 end
 
 def Expectations(&block)
-  begin
-    Expectations::SuiteRunner.instance.suite_eval &block
-  rescue
-    Expectations::SuiteRunner.instance.do_not_run
-    raise
-  end
+  Expectations::SuiteRunner.suite_eval &block
+rescue
+  Expectations::SuiteRunner.do_not_run
+  raise
 end
 
 require 'rubygems'
@@ -22,7 +20,6 @@ require File.expand_path(File.dirname(__FILE__) + '/expectations/regexp')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/range')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/module')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/string')
-require File.expand_path(File.dirname(__FILE__) + '/expectations/mocha')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/suite')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/suite_runner')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/suite_results')

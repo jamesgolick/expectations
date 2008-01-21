@@ -1,20 +1,22 @@
 class Expectations::SuiteRunner
   include Singleton
-  attr_accessor :suite, :runnable
+  attr_accessor :suite
   
   def initialize
     self.suite = Expectations::Suite.new
-    self.runnable = true
     at_exit do
-      exit 1 unless runnable && suite.execute
+      suite.execute do |result|
+        exit 1 unless result.succeeded?
+      end
     end
   end
   
-  def do_not_run
-    self.runnable = false
+  def self.do_not_run
+    self.instance.suite.do_not_run
   end
   
-  def suite_eval(&block)
-    self.suite.instance_eval &block
+  def self.suite_eval(&block)
+    self.instance.suite.instance_eval &block
   end
+    
 end

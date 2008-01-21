@@ -6,7 +6,7 @@ module Expectations::BehaviorBasedExpectation
       expected.verify
       self.extend(Expectations::Results::Fulfilled)
     rescue Mocha::ExpectationError => ex
-      self.extend(Expectations::Results::BehaviorFailure)
+      self.extend(Expectations::Results::BehaviorBasedFailure)
       self.message = ex.message
     rescue Exception => ex
       self.extend(Expectations::Results::Error)
