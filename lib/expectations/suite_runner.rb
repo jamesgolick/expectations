@@ -5,9 +5,7 @@ class Expectations::SuiteRunner
   def initialize
     self.suite = Expectations::Suite.new
     at_exit do
-      suite.execute do |result|
-        exit 1 unless result.succeeded?
-      end
+      exit 1 unless suite.execute.succeeded?
     end
   end
   
