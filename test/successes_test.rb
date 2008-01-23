@@ -70,8 +70,8 @@ Expectations do
     String
   end
   
-  expect xml("<a>\n\t<foo>bar</foo>  \n</a>") do
-    "<a><foo>bar</foo></a>"
+  expect xml("<a><foo>bar</foo></a>") do
+    "<a>\n\t<foo>bar</foo>  \n</a>"
   end
   
   expect xml(<<-eos) do
