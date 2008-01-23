@@ -70,4 +70,21 @@ Expectations do
     String
   end
   
+  expect xml("<a>\n\t<foo>bar</foo>  \n</a>") do
+    "<a><foo>bar</foo></a>"
+  end
+  
+  expect xml(<<-eos) do
+    <one>
+      <two>
+        <three>4</three>
+        <five> 6 </five>
+      </two>
+    </one>
+    eos
+    "<one><two><three>4</three>
+      <five> 6 </five>
+    </two></one>"    
+  end
+  
 end

@@ -4,6 +4,10 @@ class Expectations::Suite
     Expectations::MockRecorder.new(Mocha::Mock.new)
   end
   
+  def xml(string)
+    Expectations::XmlString.new(string)
+  end
+  
   def execute(out=STDOUT)
     suite_result = Expectations::SuiteResults.new(out)
     return suite_result if @do_not_run

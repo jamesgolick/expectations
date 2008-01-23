@@ -16,6 +16,7 @@ require 'benchmark'
 require 'erb'
 require 'fileutils'
 require File.expand_path(File.dirname(__FILE__) + '/expectations/object')
+require File.expand_path(File.dirname(__FILE__) + '/expectations/xml_string')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/regexp')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/range')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/module')
