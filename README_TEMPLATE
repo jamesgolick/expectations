@@ -42,7 +42,7 @@ The following code can be used as a new command in TextMate for running an indiv
 
 expectations can be used for state based and behavior based testing.
 
-<%= File.readlines(File.dirname(__FILE__) + "/test/sample_expectations_test.rb").collect { |line| "\t#{line}"}.join %>
+<%= File.readlines(File.dirname(__FILE__) + "/test/successes_test.rb").collect { |line| "\t#{line}"}.join %>
 
 == Contributors
 
