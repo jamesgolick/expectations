@@ -46,7 +46,7 @@ specification = Gem::Specification.new do |s|
   expect NoMethodError do 
     Object.invalid_method_call 
   end."
-	s.version = "0.1.5"
+	s.version = "0.1.6"
 	s.author = 'Jay Fields'
   s.description = "A lightweight unit testing framework. Tests (expectations) will be written as follows 
   expect 2 do 
@@ -65,7 +65,6 @@ specification = Gem::Specification.new do |s|
                          
   s.email = 'ruby@jayfields.com'
   s.files = FileList['{lib,test}/**/*.rb', '[A-Z]*$', 'rakefile.rb'].to_a
-	s.test_file = "test/all_tests.rb"
 end
 
 Rake::GemPackageTask.new(specification) do |package|

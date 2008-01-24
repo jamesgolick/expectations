@@ -1,10 +1,17 @@
 class Expectations::XmlString < String
   
   def expectations_equal_to(other)
-    self.strip.gsub(/>[\s]*</, "><") == other.strip.gsub(/>[\s]*</, "><")
+    not Regexp.new(normalize(self)).match(normalize(other)).nil?
   end
   
   def inspect
-    "[as xml] #{self.strip.gsub(/>[\s]*</, "><")}"
+    "[as xml] #{normalize(self)}"
   end
+  
+  protected
+  
+  def normalize(xml_string)
+    xml_string.strip.gsub(/>\s*</, "><")
+  end
+  
 end

@@ -18,7 +18,7 @@ expectations is designed to encourage unit testing best practices such as
 
 Mocking is done utilizing Mocha[http://mocha.rubyforge.org]
 
-by Jay[http://blog.jayfields.com] Fields[http://blog.jayfields.com]
+by {Jay Fields}[http://blog.jayfields.com]
 
 == Download and Installation
 
@@ -46,4 +46,4 @@ expectations can be used for state based and behavior based testing.
 
 == Contributors
 
-Matt Mower, Ola Bini, George Malamidis, Brian Guthrie
+Matt Mower, Ola Bini, George Malamidis, Brian Guthrie, Philippe Hanrigou, Steve McLarnon
