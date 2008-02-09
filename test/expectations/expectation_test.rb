@@ -1,24 +1,24 @@
 require File.dirname(__FILE__) + "/../test_helper"
 
 Expectations do
-  expect true do
-    Expectations::Expectation.new(1) { 2 }.execute.is_a?(Expectations::Results::StateBasedFailure)
+  expect Expectations::Results::StateBasedFailure do
+    Expectations::Expectation.new(1) { 2 }.execute
   end
   
-  expect true do
-    Expectations::Expectation.new(1) { 1 }.execute.is_a?(Expectations::Results::Fulfilled)
+  expect Expectations::Results::Fulfilled do
+    Expectations::Expectation.new(1) { 1 }.execute
   end
   
-  expect true do
-    Expectations::Expectation.new(1) { raise }.execute.is_a?(Expectations::Results::Error)
+  expect Expectations::Results::Error do
+    Expectations::Expectation.new(1) { raise }.execute
   end
   
   expect "undefined method `no_method' for Object:Class" do
     Expectations::Expectation.new(ArgumentError) { Object.no_method }.execute.exception.to_s
   end
   
-  expect true do
-    Expectations::Expectation.new(NoMethodError) { Object.no_method }.execute.is_a?(Expectations::Results::Fulfilled)
+  expect Expectations::Results::Fulfilled do
+    Expectations::Expectation.new(NoMethodError) { Object.no_method }.execute
   end
   
   expect nil do
