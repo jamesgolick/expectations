@@ -3,6 +3,10 @@ class Object
     Expectations::MockRecorder.new(self, method)
   end
   
+  def to_delegate(method)
+    Expectations::DelegateRecorder.new(self, method)
+  end
+  
   def expectations_equal_to(other)
     self == other
   end

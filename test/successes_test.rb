@@ -70,10 +70,12 @@ Expectations do
     String
   end
   
+  # State based test with XML strings, whitespace between tags is ignored
   expect xml("<a><foo>bar</foo></a>") do
     "<a>\n\t<foo>bar</foo>  \n</a>"
   end
   
+  # State based test with XML strings, whitespace between tags is ignored
   expect xml(<<-eos) do
     <one>
       <two>
@@ -84,7 +86,18 @@ Expectations do
     eos
     "<one><two><three>4</three>
       <five> 6 </five>
-    </two></one>"    
+    </two></one>"
+  end
+
+  # this is normally defined in the file specific to the class
+  klass = Class.new do
+    def save(arg)
+      record.save(arg)
+    end
+  end
+  # State based delegation test
+  expect klass.new.to_delegate(:save).to(:record) do |instance|
+    instance.save(1)
   end
   
 end
