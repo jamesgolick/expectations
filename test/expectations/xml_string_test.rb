@@ -53,6 +53,10 @@ Expectations do
     Expectations::XmlString.new("<fragment>content</fragment>").expectations_equal_to "<container><fragment>content</fragment></container>"
   end
 
+  expect true do
+    Expectations::XmlString.new('<?xml version="1.0"?>').expectations_equal_to '<?xml version="1.0"?>'
+  end
+
   expect "[as xml] <fragment>content</fragment>" do
     Expectations::XmlString.new("  \t<fragment>content</fragment>\n  ").inspect
   end

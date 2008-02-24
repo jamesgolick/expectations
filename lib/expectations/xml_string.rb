@@ -1,7 +1,7 @@
 class Expectations::XmlString < String
   
   def expectations_equal_to(other)
-    not Regexp.new(normalize(self)).match(normalize(other)).nil?
+    not Regexp.new(Regexp.escape(normalize(self))).match(normalize(other)).nil?
   end
   
   def inspect
