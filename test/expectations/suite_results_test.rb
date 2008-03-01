@@ -13,25 +13,19 @@ Expectations do
     results.errors.size
   end
   
-  expect false do
-    results = Expectations::SuiteResults.new(Silent)
+  expect Expectations::SuiteResults.new(Silent).not.to.have.succeeded? do |results|
     results << Object.new.extend(Expectations::Results::StateBasedFailure)
     results << Object.new.extend(Expectations::Results::Fulfilled)
-    results.succeeded?
   end
 
-  expect false do
-    results = Expectations::SuiteResults.new(Silent)
+  expect Expectations::SuiteResults.new(Silent).not.to.have.succeeded? do |results|
     results << Object.new.extend(Expectations::Results::BehaviorBasedFailure)
     results << Object.new.extend(Expectations::Results::Fulfilled)
-    results.succeeded?
   end
   
-  expect true do
-    results = Expectations::SuiteResults.new(Silent)
+  expect Expectations::SuiteResults.new(Silent).to.have.succeeded? do |results|
     results << Object.new.extend(Expectations::Results::Fulfilled)
     results << Object.new.extend(Expectations::Results::Fulfilled)
-    results.succeeded?
   end
   
 end

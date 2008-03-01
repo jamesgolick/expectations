@@ -7,6 +7,14 @@ class Object
     Expectations::DelegateRecorder.new(self, method)
   end
   
+  def to
+    Expectations::PositiveStateBasedRecorder.new(self)
+  end
+  
+  def not
+    Expectations::NegativeStateBasedRecorder.new(self)
+  end
+  
   def expectations_equal_to(other)
     self == other
   end

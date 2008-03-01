@@ -18,52 +18,52 @@ Expectations do
     Object.new.extend(Expectations::Results::Error).char
   end
 
-  expect true do
-    Object.new.extend(Expectations::Results::Fulfilled).fulfilled?
+  expect Object.new.to.be.fulfilled? do |instance|
+    instance.extend(Expectations::Results::Fulfilled)
   end
 
-  expect false do
-    Object.new.extend(Expectations::Results::StateBasedFailure).fulfilled?
+  expect Object.new.not.to.be.fulfilled? do |instance|
+    instance.extend(Expectations::Results::StateBasedFailure)
   end
 
-  expect false do
-    Object.new.extend(Expectations::Results::BehaviorBasedFailure).fulfilled?
+  expect Object.new.not.to.be.fulfilled? do |instance|
+    instance.extend(Expectations::Results::BehaviorBasedFailure)
   end
 
-  expect false do
-    Object.new.extend(Expectations::Results::Error).fulfilled?
+  expect Object.new.not.to.be.fulfilled? do |instance|
+    instance.extend(Expectations::Results::Error)
   end
 
-  expect false do
-    Object.new.extend(Expectations::Results::Fulfilled).error?
+  expect Object.new.not.to.be.error? do |instance|
+    instance.extend(Expectations::Results::Fulfilled)
   end
 
-  expect false do
-    Object.new.extend(Expectations::Results::StateBasedFailure).error?
+  expect Object.new.not.to.be.error? do |instance|
+    instance.extend(Expectations::Results::StateBasedFailure)
   end
 
-  expect false do
-    Object.new.extend(Expectations::Results::BehaviorBasedFailure).error?
+  expect Object.new.not.to.be.error? do |instance|
+    instance.extend(Expectations::Results::BehaviorBasedFailure)
   end
 
-  expect true do
-    Object.new.extend(Expectations::Results::Error).error?
+  expect Object.new.to.be.error? do |instance|
+    instance.extend(Expectations::Results::Error)
   end
 
-  expect false do
-    Object.new.extend(Expectations::Results::Fulfilled).failure?
+  expect Object.new.not.to.be.failure? do |instance|
+    instance.extend(Expectations::Results::Fulfilled)
   end
 
-  expect true do
-    Object.new.extend(Expectations::Results::StateBasedFailure).failure?
+  expect Object.new.to.be.failure? do |instance|
+    instance.extend(Expectations::Results::StateBasedFailure)
   end
 
-  expect true do
-    Object.new.extend(Expectations::Results::BehaviorBasedFailure).failure?
+  expect Object.new.to.be.failure? do |instance|
+    instance.extend(Expectations::Results::BehaviorBasedFailure)
   end
 
-  expect false do
-    Object.new.extend(Expectations::Results::Error).failure?
+  expect Object.new.not.to.be.failure? do |instance|
+    instance.extend(Expectations::Results::Error)
   end
 
 end
