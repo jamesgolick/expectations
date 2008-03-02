@@ -37,22 +37,22 @@ end
 Gem::manage_gems
 
 specification = Gem::Specification.new do |s|
-	s.name   = "expectations"
+  s.name   = "expectations"
   s.summary = "A lightweight unit testing framework. Tests (expectations) will be written as follows 
   expect 2 do 
     1 + 1 
   end 
-  
+
   expect NoMethodError do 
     Object.invalid_method_call 
   end."
-	s.version = "0.1.9"
-	s.author = 'Jay Fields'
+  s.version = "0.2.0"
+  s.author = 'Jay Fields'
   s.description = "A lightweight unit testing framework. Tests (expectations) will be written as follows 
   expect 2 do 
     1 + 1 
   end 
-  
+
   expect NoMethodError do 
     Object.invalid_method_call 
   end."
@@ -62,12 +62,13 @@ specification = Gem::Specification.new do |s|
   s.has_rdoc = true
   s.extra_rdoc_files = ['README']
   s.rdoc_options << '--title' << 'expectations' << '--main' << 'README' << '--line-numbers'
-                         
+
   s.email = 'ruby@jayfields.com'
   s.files = FileList['{lib,test}/**/*.rb', '[A-Z]*$', 'rakefile.rb'].to_a
+  s.add_dependency('mocha', '>= 0.5.5')
 end
 
 Rake::GemPackageTask.new(specification) do |package|
-	 package.need_zip = false
-	 package.need_tar = false
+  package.need_zip = false
+  package.need_tar = false
 end
