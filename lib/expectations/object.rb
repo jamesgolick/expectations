@@ -8,11 +8,27 @@ class Object
   end
   
   def to
-    Expectations::PositiveStateBasedRecorder.new(self)
+    Expectations::StateBasedRecorder.new(self).extend Expectations::PositiveStateBasedRecorder
   end
   
   def not
-    Expectations::NegativeStateBasedRecorder.new(self)
+    Not.new(self)
+  end
+  
+  def __negate__
+    !self
+  end
+
+  class Not
+    private(*instance_methods.select { |m| m !~ /(^__|^\W|^binding$)/ })
+
+    def initialize(subject)
+      @subject = subject
+    end
+
+    def method_missing(sym, *args, &blk)
+      @subject.send(sym,*args,&blk).__negate__
+    end
   end
   
   def expectations_equal_to(other)

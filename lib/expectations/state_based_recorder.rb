@@ -15,10 +15,6 @@ class Expectations::StateBasedRecorder
     self
   end
   
-  def message
-    @message_parts.join(" ")
-  end
-  
   def method_stack
     @method_stack ||= []
   end

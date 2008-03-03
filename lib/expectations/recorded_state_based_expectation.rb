@@ -7,7 +7,7 @@ module Expectations::RecordedStateBasedExpectation
         self.extend(Expectations::Results::Fulfilled)
       else
         self.extend(Expectations::Results::StateBasedFailure)
-        self.message = "expected #{expected.subject} to #{expected.message}"
+        self.message = expected.message
       end
     rescue Exception => ex
       self.extend(Expectations::Results::Error)
