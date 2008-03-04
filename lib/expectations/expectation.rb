@@ -7,8 +7,7 @@ class Expectations::Expectation
     self.file, self.line = eval "[__FILE__, __LINE__]", block.binding
     case
       when expected.is_a?(Expectations::DelegateRecorder) then extend(Expectations::DelegateExpectation)
-      when expected.is_a?(Expectations::PositiveStateBasedRecorder) then extend(Expectations::RecordedStateBasedExpectation)
-      when expected.is_a?(Expectations::NegativeStateBasedRecorder) then extend(Expectations::RecordedStateBasedExpectation)
+      when expected.is_a?(Expectations::PositiveStateBasedRecorder) then extend(Expectations::RecordedExpectation)
       when expected.is_a?(Expectations::MockRecorder) then extend(Expectations::BehaviorBasedExpectation)
       else extend(Expectations::StateBasedExpectation)
     end

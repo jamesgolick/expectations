@@ -95,8 +95,9 @@ Expectations do
       record.save(arg)
     end
   end
+  
   # State based delegation test
-  expect klass.new.to_delegate(:save).to(:record) do |instance|
+  expect klass.new.to.delegate(:save).to(:record) do |instance|
     instance.save(1)
   end
   

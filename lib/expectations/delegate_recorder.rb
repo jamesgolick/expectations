@@ -1,22 +1,21 @@
-class Expectations::DelegateRecorder
-  attr_reader :klass, :subject, :meth
-  def initialize(klass, meth)
-    @klass, @subject_mock, @meth = klass, Mocha::Mock.new, meth
-    @subject_mock.expects(meth).returns(:the_subjects_response)
+module Expectations::DelegateRecorder
+  def delegate!(meth)
+    @subject_mock = Mocha::Mock.new
+    @meth = meth
+    @subject_mock.expects(meth)
   end
   
-  def to(subject)
-    @subject = subject
+  def to(receiver)
+    @receiver = receiver
     self
   end
   
   def mock
-    @klass.stubs(@subject).returns(@subject_mock)
-    @klass
+    subject.stubs(@receiver).returns(@subject_mock)
+    subject
   end
   
   def verify(actual)
     @subject_mock.verify
-    actual == :the_subjects_response
   end
 end

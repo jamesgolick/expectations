@@ -8,14 +8,14 @@ class Object
   end
   
   def to
-    Expectations::StateBasedRecorder.new(self).extend Expectations::PositiveStateBasedRecorder
+    Expectations::Recorder.new(self)
   end
   
   def not
     Not.new(self)
   end
   
-  def __negate__
+  def not!
     !self
   end
 
@@ -27,7 +27,7 @@ class Object
     end
 
     def method_missing(sym, *args, &blk)
-      @subject.send(sym,*args,&blk).__negate__
+      @subject.send(sym,*args,&blk).not!
     end
   end
   
