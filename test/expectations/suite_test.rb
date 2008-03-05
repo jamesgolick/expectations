@@ -20,12 +20,8 @@ Expectations do
     suite.execute(Silent).succeeded?
   end
   
-  expect Expectations::MockRecorder do
-    Expectations::Suite.new.mock
-  end
-  
   expect Mocha::Mock do
-    Expectations::Suite.new.mock.target
+    Expectations::Suite.new.mock
   end
   
   expect 3 do

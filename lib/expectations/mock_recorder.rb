@@ -1,40 +1,31 @@
-class Expectations::MockRecorder
-  attr_accessor :target
-  def initialize(target, method=nil)
-    self.target = target
-    events << MockEvent.new(:expects, [method]) unless method.nil?
-  end
+module Expectations::MockRecorder
   
-  def to_receive(method)
-    events << MockEvent.new(:expects, [method])
+  def receive!(method)
+    method_stack << [:expects, [method]]
     self
   end
   
-  def events
-    @events ||= []
+  def method_stack
+    @method_stack ||= []
   end
   
-  def method_missing(method, *args)
-    super if events.empty?
-    events << MockEvent.new(method, args)
+  def method_missing(sym, *args)
+    super if method_stack.empty?
+    method_stack << [sym, args]
     self
   end
   
-  def mock
-    events.inject(target) do |result, element|
-      result.send(element.method, *element.args)
-    end
-    target
+  def subject!
+    method_stack.inject(subject) { |result, element| result.send element.first, *element.last }
+    subject
   end
   
   def verify
-    target.verify
+    subject.verify
   end
   
-  class MockEvent
-    attr_accessor :method, :args
-    def initialize(method, args)
-      self.method, self.args = method, args
-    end
+  def mocha_error_message(ex)
+    ex.message
   end
+  
 end

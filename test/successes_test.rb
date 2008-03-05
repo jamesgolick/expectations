@@ -13,13 +13,13 @@ Expectations do
   end
   
   # Behavior based test using a traditional mock
-  expect mock.to_receive(:dial).with("2125551212").times(2) do |phone|
+  expect mock.to.receive(:dial).with("2125551212").times(2) do |phone|
     phone.dial("2125551212")
     phone.dial("2125551212")
   end
 
   # Behavior based test on a concrete mock
-  expect Object.to_receive(:deal) do
+  expect Object.to.receive(:deal) do
     Object.deal
   end
   
@@ -95,7 +95,6 @@ Expectations do
       record.save(arg)
     end
   end
-  
   # State based delegation test
   expect klass.new.to.delegate(:save).to(:record) do |instance|
     instance.save(1)

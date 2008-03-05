@@ -1,12 +1,4 @@
 class Object
-  def to_receive(method)
-    Expectations::MockRecorder.new(self, method)
-  end
-  
-  def to_delegate(method)
-    Expectations::DelegateRecorder.new(self, method)
-  end
-  
   def to
     Expectations::Recorder.new(self)
   end
