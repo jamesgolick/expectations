@@ -20,7 +20,7 @@ class Expectations::Suite
   end
   
   def expect(expected, &block)
-    expectations << Expectations::Expectation.new(expected, &block)
+    expectations << Expectations::Expectation.new(expected, *caller.first.split(/:/), &block)
   end
   
   def do_not_run
@@ -32,7 +32,6 @@ class Expectations::Suite
     [expectations.inject { |result, expectation| expectation.line > line.to_i ? result : expectation }]
   end
 
-  private
   def expectations
     @expectations ||= []
   end

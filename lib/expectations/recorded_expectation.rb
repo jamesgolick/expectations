@@ -2,7 +2,7 @@ module Expectations::RecordedExpectation
   def execute
     begin
       mocha_setup
-      instance_exec expected.subject!, &block
+      instance_exec expected.subject!, &block if block
       if expected.verify!
         self.extend(Expectations::Results::Fulfilled)
       else

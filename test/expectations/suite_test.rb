@@ -46,4 +46,28 @@ Expectations do
     suite.expectations_for(__LINE__ - 1).first.expected
   end
   
+  expect __LINE__ + 2 do
+    suite = Expectations::Suite.new
+    suite.expect(1) { 2 }
+    suite.expectations.first.line
+  end
+  
+  expect __LINE__ + 2 do
+    suite = Expectations::Suite.new
+    suite.expect(1) { raise }
+    suite.expectations.first.line
+  end
+  
+  expect __FILE__ do
+    suite = Expectations::Suite.new
+    suite.expect(1) { 2 }
+    suite.expectations.first.file
+  end
+  
+  expect __FILE__ do
+    suite = Expectations::Suite.new
+    suite.expect(1) { raise }
+    suite.expectations.first.file
+  end
+  
 end
