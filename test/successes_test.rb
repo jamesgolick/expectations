@@ -18,6 +18,18 @@ Expectations do
     phone.dial("2125551212")
   end
 
+  # Behavior based test using a stub
+  expect stub.to.receive(:dial).with("2125551212").times(2) do |phone|
+    phone.dial("2125551212")
+    phone.dial("2125551212")
+  end
+
+  # Behavior based test using a stub_everything
+  expect stub_everything.to.receive(:dial).with("2125551212").times(2) do |phone|
+    phone.dial("2125551212")
+    phone.dial("2125551212")
+  end
+
   # Behavior based test on a concrete mock
   expect Object.to.receive(:deal) do
     Object.deal
@@ -98,6 +110,24 @@ Expectations do
   # State based delegation test
   expect klass.new.to.delegate(:save).to(:record) do |instance|
     instance.save(1)
+  end
+  
+  # this is normally defined in the file specific to the class
+  klass = Class.new do
+    attr_accessor :started
+  end
+  # State based fluent interface boolean test using to be
+  expect klass.new.to.be.started do |process|
+    process.started = true
+  end
+  
+  # this is normally defined in the file specific to the class
+  klass = Class.new do
+    attr_accessor :finished
+  end
+  # State based fluent interface boolean test using to have
+  expect klass.new.to.have.finished do |process|
+    process.finished = true
   end
   
 end

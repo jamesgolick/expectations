@@ -1,8 +1,6 @@
 class Expectations::Suite
   
-  def mock
-    Mocha::Mock.new
-  end
+  include Mocha::Standalone
   
   def xml(string)
     Expectations::XmlString.new(string)
