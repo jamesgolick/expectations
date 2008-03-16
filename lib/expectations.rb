@@ -16,6 +16,7 @@ require 'benchmark'
 require 'erb'
 require 'fileutils'
 require File.expand_path(File.dirname(__FILE__) + '/expectations/object')
+require File.expand_path(File.dirname(__FILE__) + '/expectations/blank_slate')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/recorder')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/delegate_recorder')
 require File.expand_path(File.dirname(__FILE__) + '/expectations/recorded_expectation')

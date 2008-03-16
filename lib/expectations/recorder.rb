@@ -1,5 +1,5 @@
-class Expectations::Recorder
-
+class Expectations::Recorder < BlankSlate
+  
   attr_reader :subject
   def initialize(subject)
     @subject = subject
