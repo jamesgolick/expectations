@@ -8,7 +8,6 @@ rescue
   raise
 end
 
-require 'rubygems'
 require 'mocha'
 require 'mocha/standalone'
 require 'singleton'
