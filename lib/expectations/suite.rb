@@ -18,7 +18,7 @@ class Expectations::Suite
   end
   
   def expect(expected, &block)
-    expectations << Expectations::Expectation.new(expected, *caller.first.split(/:/), &block)
+    expectations << Expectations::Expectation.new(expected, *caller.first.split(/:/)[0..1], &block)
   end
   
   def do_not_run
