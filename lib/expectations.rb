@@ -2,7 +2,7 @@ module Expectations
 end
 
 def Expectations(&block)
-  Expectations::SuiteRunner.suite_eval &block
+  Expectations::SuiteRunner.suite_eval(&block)
 rescue
   Expectations::SuiteRunner.do_not_run
   raise

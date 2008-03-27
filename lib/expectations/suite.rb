@@ -2,6 +2,10 @@ class Expectations::Suite
   
   include Mocha::Standalone
   
+  def initialize
+    @do_not_run = false
+  end
+  
   def xml(string)
     Expectations::XmlString.new(string)
   end

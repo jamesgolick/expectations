@@ -14,7 +14,7 @@ class Expectations::SuiteRunner
   end
   
   def self.suite_eval(&block)
-    self.instance.suite.instance_eval &block
+    self.instance.suite.instance_eval(&block)
   end
     
 end
