@@ -58,12 +58,11 @@ end
 #
 module Kernel
   class << self
-    alias_method :blank_slate_method_added, :method_added
-
     # Detect method additions to Kernel and remove them in the
     # BlankSlate class.
-    def method_added(name)
-      result = blank_slate_method_added(name)
+    unbound_method = method(:method_added)
+    define_method :method_added do |name|
+      result = unbound_method.call(name)
       return result if self != Kernel
       BlankSlate.hide(name)
       result
@@ -100,9 +99,9 @@ end
 # exposed in the first place.
 #
 class Module
-  alias blankslate_original_append_features append_features
-  def append_features(mod)
-    result = blankslate_original_append_features(mod)
+  unbound_method = instance_method(:append_features)
+  define_method :append_features do |mod|
+    result = unbound_method.bind(self).call(mod)
     return result if mod != Object
     instance_methods.each do |name|
       BlankSlate.hide(name)
