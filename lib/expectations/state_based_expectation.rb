@@ -2,7 +2,7 @@ module Expectations::StateBasedExpectation
   def execute
     begin
       mocha_setup
-      self.actual = instance_eval &block
+      self.actual = instance_eval(&block)
       return self.extend(Expectations::Results::Fulfilled) if expected.expectations_equal_to(actual)
     rescue Exception => ex
       return self.extend(Expectations::Results::Fulfilled) if expected == ex.class
