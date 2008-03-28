@@ -76,12 +76,11 @@ end
 #
 class Object
   class << self
-    alias_method :blank_slate_method_added, :method_added
-
     # Detect method additions to Object and remove them in the
     # BlankSlate class.
-    def method_added(name)
-      result = blank_slate_method_added(name)
+    unbound_method = method(:method_added)
+    define_method :method_added do |name|
+      result = unbound_method.call(name)
       return result if self != Object
       BlankSlate.hide(name)
       result

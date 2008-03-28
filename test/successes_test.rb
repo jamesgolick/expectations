@@ -130,4 +130,7 @@ Expectations do
     process.finished = true
   end
   
+  expect nil.to.be.nil?
+  expect Object.not.to.be.nil?
+  
 end
