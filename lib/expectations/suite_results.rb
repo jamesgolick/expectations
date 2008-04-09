@@ -1,8 +1,8 @@
 class Expectations::SuiteResults
-  attr_accessor :out, :expectations, :err
+  attr_accessor :out, :expectations
 
-  def initialize(out, err)
-    self.out, self.err, self.expectations = out, err, []
+  def initialize(out)
+    self.out, self.expectations = out, []
     out.print "Expectations "
   end
 
@@ -37,15 +37,8 @@ class Expectations::SuiteResults
     else
       print_fail
     end
-    # print_warnings
   end
   
-  # def print_warnings
-  #   return if warnings.empty?
-  #   err.print "Expectations allows you to add additional mock expectations, but strongly recommends you write separate tests instead\n"
-  #   warnings.each { |warning| err.print "#{warning.description} on #{warning.location}\n" }
-  # end
-
   def print_success
     out.puts "\nSuccess: #{fulfilled.size} fulfilled"
   end

@@ -2,7 +2,9 @@ module Expectations::StateBasedExpectation
   def execute
     begin
       mocha_setup
-      self.actual = instance_eval(&block)
+      warn_for_expects do
+        self.actual = instance_eval(&block)
+      end
       mocha_verify
       if expected.expectations_equal_to(actual)
         self.extend(Expectations::Results::Fulfilled)

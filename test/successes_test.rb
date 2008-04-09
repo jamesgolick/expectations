@@ -120,5 +120,5 @@ Expectations do
 
   expect nil.to.be.nil?
   expect Object.not.to.be.nil?
-  
+
 end
