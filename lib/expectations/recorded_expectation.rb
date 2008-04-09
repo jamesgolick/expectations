@@ -3,7 +3,7 @@ module Expectations::RecordedExpectation
     begin
       mocha_setup
       instance_exec(expected.subject!, &block) if block
-      if expected.verify!
+      if expected.verify! && mocha_verify
         self.extend(Expectations::Results::Fulfilled)
       else
         self.extend(Expectations::Results::StateBasedFailure)

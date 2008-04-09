@@ -61,4 +61,38 @@ Expectations do
     suite.execute(Silent).expectations.first
   end
 
+  expect Expectations::Results::Error do
+    suite = Expectations::Suite.new
+    suite.expect(1) do
+      Object.expects(:foo)
+    end
+    suite.execute(Silent).expectations.first
+  end
+
+  expect Expectations::Results::Error do
+    suite = Expectations::Suite.new
+    suite.expect(1) do
+      mock(:foo => 1)
+    end
+    suite.execute(Silent, Silent).expectations.first
+  end
+  
+  expect Expectations::Results::BehaviorBasedFailure do
+    suite = Expectations::Suite.new
+    suite.expect(Object.to.receive(:foo)) do
+      Object.foo
+      mock(:foo => 1)
+    end
+    suite.execute(Silent, Silent).expectations.first
+  end
+  
+  expect Expectations::Results::BehaviorBasedFailure do
+    suite = Expectations::Suite.new
+    suite.expect(Object.to.receive(:foo)) do
+      Object.foo
+      Object.expects(:bar)
+    end
+    suite.execute(Silent).expectations.first
+  end
+  
 end

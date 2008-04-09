@@ -10,5 +10,4 @@ class Expectations::Expectation
       else extend(Expectations::StateBasedExpectation)
     end
   end
-  
 end

@@ -3,7 +3,12 @@ module Expectations::StateBasedExpectation
     begin
       mocha_setup
       self.actual = instance_eval(&block)
-      return self.extend(Expectations::Results::Fulfilled) if expected.expectations_equal_to(actual)
+      mocha_verify
+      if expected.expectations_equal_to(actual)
+        self.extend(Expectations::Results::Fulfilled)
+      else
+        self.extend(Expectations::Results::StateBasedFailure)
+      end
     rescue Exception => ex
       return self.extend(Expectations::Results::Fulfilled) if expected == ex.class
       self.extend(Expectations::Results::Error)
@@ -13,6 +18,5 @@ module Expectations::StateBasedExpectation
     ensure
       mocha_teardown
     end
-    self.extend(Expectations::Results::StateBasedFailure)
   end
 end
